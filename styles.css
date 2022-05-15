@@ -30,7 +30,6 @@ body {
     min-height: 100%;
     transform: translateX(380px);
     transition: transform 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
-
 }
 
 .button-with-icon {
@@ -55,5 +54,5 @@ body {
     background-color: blue;
     width: 40px;
     height: 40px;
-    border-radius: 30%;
+    border-radius: 50%;
 }
