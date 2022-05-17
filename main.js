@@ -12,7 +12,7 @@ const menu = {
         { 
             type: 'button',
             icon: icons.news,
-            text: 'Новости' 
+            text: 'First menu option' 
         },
         
     ]
