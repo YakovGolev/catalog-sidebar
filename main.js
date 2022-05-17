@@ -1,5 +1,9 @@
 'use strict';
 
+const classes = {
+    MENU_OPENED: 'menu-state--opened'
+}
+
 const icons = {
     news: `
         <svg class="button-with-icon__icon" height="20" width="20" viewBox="0 0 20 20">
@@ -20,6 +24,8 @@ const menu = {
 const menuContainer = document.querySelector('.docs-sidebar');
 const mainPanel = menuContainer.querySelector('.main-panel');
 const button = document.querySelector('.sidebar-button');
+const pageContent = document.querySelector('.page-content');
+const menuBorder = document.querySelector('.hover-frame');
 
 function drawMenu(menuObj){
     mainPanel.innerHTML = '';
@@ -34,13 +40,19 @@ function drawMenu(menuObj){
     });
 }
 
-drawMenu(menu);
+function menuClickHandler(){
+    if (menuContainer.classList.contains(classes.MENU_OPENED)){
+        menuContainer.classList.remove(classes.MENU_OPENED);
+        pageContent.classList.remove(classes.MENU_OPENED);
+        menuBorder.addEventListener('click', menuClickHandler);
+    }
+    else {
+        menuContainer.classList.add(classes.MENU_OPENED);
+        pageContent.classList.add(classes.MENU_OPENED);
+        menuBorder.removeEventListener('click', menuClickHandler);
+    }
+}
 
-button.addEventListener('click', e => {
-    if (menuContainer.classList.contains('menu-state--opened')){
-        menuContainer.classList.remove('menu-state--opened');
-    }
-    else{
-        menuContainer.classList.add('menu-state--opened');
-    }
-});
+drawMenu(menu);
+button.addEventListener('click', menuClickHandler);
+menuBorder.addEventListener('click', menuClickHandler);

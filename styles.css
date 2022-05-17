@@ -1,9 +1,9 @@
 body {
     margin: 0;
 }
-.page-content{
-    margin: 20px 20px 20px 100px;
-    
+.page-content {
+    margin: 30px 60px 40px 120px;
+    transition: margin 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
 .sidebar-wrapper {
@@ -24,6 +24,10 @@ body {
     transform: translateX(0);
 }
 
+.page-content.menu-state--opened {
+    margin-left: 500px;
+}
+
 .main-panel {
     background-color: burlywood;
     width: 440px;
@@ -41,7 +45,7 @@ body {
 }
 
 .button-with-icon__icon {
-    margin: 0 20px ;
+    margin: 0 20px;
 }
 
 .hover-frame {
