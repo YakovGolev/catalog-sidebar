@@ -18,10 +18,10 @@ body {
     position: fixed;
     top: 0;
     height: 100%;
-    width: 600px;
+    width: 100%;
     overflow: hidden;
     display: flex;
-    transform: translateX(-440px);
+    transform: translateX(calc(60px - 100%));
     transition: transform 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
     z-index: 999;
 }
@@ -33,9 +33,9 @@ body {
 
 .main-panel {
     background-color: burlywood;
-    width: 440px;
+    width: 100%;
     min-height: 100%;
-    transform: translateX(440px);
+    transform: translateX(calc(100% - 60px));
     transition: transform 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
@@ -52,7 +52,7 @@ body {
 }
 
 .hover-frame {
-    width: 440px;
+    width: calc(100% - 60px);
     height: 100%;
     overflow: hidden;
 }
@@ -68,6 +68,13 @@ body {
 }
 
 @media screen and (min-width: 600px) and (orientation: landscape) {
+    .hover-frame {
+        width: 440px;
+    }
+    .main-panel {
+        width: 440px;
+        transform: translateX(440px);
+    }
     .sidebar-wrapper{
         transform: translateX(-380px);
     }
