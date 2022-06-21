@@ -1,7 +1,8 @@
 'use strict';
 
 const classes = {
-    MENU_OPENED: 'menu-state--opened'
+    MENU_OPENED: 'menu-state--opened',
+    BUTTON_ACTIVE: 'active'
 }
 
 const icons = {
@@ -13,17 +14,18 @@ const icons = {
 
 const menu = {
     items: [
-        { 
+        {
             type: 'button',
             icon: icons.news,
-            text: 'First menu option' 
+            text: 'First menu option'
         },
-        
+
     ]
 }
 const menuContainer = document.querySelector('.docs-sidebar');
 const mainPanel = menuContainer.querySelector('.main-panel');
 const button = document.querySelector('.sidebar-button');
+const menuHamIcon = button.querySelector('svg');
 const pageContent = document.querySelector('.page-content');
 const menuBorder = document.querySelector('.hover-frame');
 
@@ -44,11 +46,13 @@ function menuClickHandler(){
     if (menuContainer.classList.contains(classes.MENU_OPENED)){
         menuContainer.classList.remove(classes.MENU_OPENED);
         pageContent.classList.remove(classes.MENU_OPENED);
+        menuHamIcon.classList.remove(classes.BUTTON_ACTIVE);
         menuBorder.addEventListener('click', menuClickHandler);
     }
     else {
         menuContainer.classList.add(classes.MENU_OPENED);
         pageContent.classList.add(classes.MENU_OPENED);
+        menuHamIcon.classList.add(classes.BUTTON_ACTIVE);
         menuBorder.removeEventListener('click', menuClickHandler);
     }
 }
