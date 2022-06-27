@@ -1,4 +1,4 @@
-'use strict';
+import './styles.css';
 
 const classes = {
     MENU_OPENED: 'menu-state--opened',
@@ -102,17 +102,17 @@ const folder2 = {
 
 
 
-const menuContainer = document.querySelector('.docs-sidebar');
-const mainPanel = menuContainer.querySelector('.main-panel');
-const button = document.querySelector('.sidebar-button');
-const menuHamIcon = button.querySelector('svg');
-const pageContent = document.querySelector('.page-content');
-const menuBorder = document.querySelector('.hover-frame');
+const menuContainer = document.querySelector('.docs-sidebar') ?? document.createElement('div');
+const mainPanel = menuContainer.querySelector('.main-panel') ?? document.createElement('div');;
+const button = document.querySelector('.sidebar-button') ?? document.createElement('div');;
+const menuHamIcon = button?.querySelector('svg') ?? document.createElement('div');;
+const pageContent = document.querySelector('.page-content') ?? document.createElement('div');;
+const menuBorder = document.querySelector('.hover-frame') ?? document.createElement('div');;
 const menuMap = new Map();
 
-function renderMenu(menuObj){
+function renderMenu(menuObj: any){
     mainPanel.innerHTML = '';
-    menuObj.items.forEach(item => {
+    menuObj.items.forEach((item: any) => {
         const element = document.createElement('div');
         element.innerHTML = `
         <div class="main-panel__button button-with-icon">
@@ -125,7 +125,7 @@ function renderMenu(menuObj){
         btn.addEventListener('click', e => {
             e.stopPropagation();
             e.preventDefault();
-            selectMenuItem(e.currentTarget);
+            selectMenuItem(e.currentTarget as any);
             if (item.type === 'button' || item.type === 'document'){                
                 console.log(item.href);
             }
@@ -136,14 +136,14 @@ function renderMenu(menuObj){
     });
 }
 
-function selectMenuItem(element){
+function selectMenuItem(element: HTMLElement){
     document.querySelectorAll('.main-panel__button').forEach(btn => {
         btn.classList.remove(classes.BUTTON_ACTIVE)
     })
     element.classList.add(classes.BUTTON_ACTIVE);
 }
 
-function renderFolder(folder){
+function renderFolder(folder: any){
     if (!menuContainer.classList.contains(classes.MENU_OPENED)){
         menuContainer.classList.add(classes.MENU_OPENED);
         pageContent.classList.add(classes.MENU_OPENED);
