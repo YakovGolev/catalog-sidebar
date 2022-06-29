@@ -17,7 +17,8 @@
     "alwaysStrict": true,
     "noImplicitReturns": true,
     "removeComments": true,
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "outDir": "../build/",
   },
   "include": [
     "src"
