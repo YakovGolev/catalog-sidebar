@@ -13,8 +13,8 @@ export interface IApplication {
  */
 export default class AbstractPresenter {
 
-    declare _application: IApplication
-    declare _activeInnerPresenter: AbstractPresenter | null;
+    _application: IApplication
+    _activeInnerPresenter: AbstractPresenter | null;
 
     constructor(application : IApplication) {
         if (new.target === AbstractPresenter) {

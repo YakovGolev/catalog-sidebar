@@ -11,11 +11,12 @@ export interface IRoute {
  */
 export class Router {
 
-    declare _eventBus : EventBus;
-    declare _route : IRoute;
+    _eventBus : EventBus;
+    _route : IRoute;
 
     constructor(eventBus: EventBus) {
         this._eventBus = eventBus;
+        this._route = this.currentWindowRoute;
         this._initHistoryNaviration();
     }
 

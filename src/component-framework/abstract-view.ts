@@ -3,8 +3,8 @@
  */
 export default class AbstractView {
 
-    declare _element : HTMLElement | null;
-    declare _handlerLinks : Map<string, (e:Event) => void>;
+    _element : HTMLElement | null;
+    _handlerLinks : Map<string, (e:Event) => void>;
 
     constructor() {
         if (new.target === AbstractView) {

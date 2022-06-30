@@ -1,0 +1,14 @@
+.page-content {
+    margin: 120px 60px 40px 60px;
+    transition: all 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+@media screen and (min-width: 600px) and (orientation: landscape) {
+    .page-content {
+        margin-left: 120px;
+    }
+    .page-content.menu-state--opened {
+        margin-left: 500px;
+        transform: translateX(0);
+    }
+  }
