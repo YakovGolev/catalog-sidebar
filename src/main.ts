@@ -18,8 +18,6 @@ import './styles.css';
         new PageGridPresenter(app, contentContainer).render();
 }());
 
-
-
 /* const classes = {
     MENU_OPENED: 'menu-state--opened',
     BUTTON_ACTIVE: 'active'
