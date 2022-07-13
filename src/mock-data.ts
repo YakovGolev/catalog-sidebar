@@ -84,9 +84,17 @@ const folder1 = {
             id: undefined,
             type: MenuItemType.item,
             icon: documentIcon,
-            text: 'Статья 2',
+            text: 'Статья 2. Эта статья с достаточно длинным названием для проверки переноса строк',
             href: '/321'
+        },
+        {
+            id: undefined,
+            type: MenuItemType.item,
+            icon: documentIcon,
+            text: 'Статья 3',
+            href: '/3221'
         }
+
     ]
 };
 

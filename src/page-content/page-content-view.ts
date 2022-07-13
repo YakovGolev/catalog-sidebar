@@ -1,3 +1,4 @@
+import { MENU_OPENED } from '../constants';
 import AbstractView from '../component-framework/abstract-view';
 import './page-content.css';
 
@@ -11,5 +12,13 @@ const createContentTemplate = () => `
 export class PageContentView extends AbstractView {
     get template(): string {
         return createContentTemplate();
+    }
+
+    setNarrow(){
+        this.element.classList.add(MENU_OPENED);
+    }
+
+    setWide(){
+        this.element.classList.remove(MENU_OPENED);
     }
 }

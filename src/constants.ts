@@ -1,0 +1,1 @@
+export const MENU_OPENED = 'menu-state--opened';

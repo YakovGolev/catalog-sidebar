@@ -6,7 +6,9 @@
 export enum EventType {
     HashChanged = 'HashChanged',
     PathChanged = 'PathChanged',
-    PresenterRendered = 'PresenterRendered'
+    PresenterRendered = 'PresenterRendered',
+    MenuOpened = 'MenuOpened',
+    MenuClosed = 'MenuClosed'
 };
 
 /**

@@ -2,8 +2,11 @@
     margin: 120px 60px 40px 60px;
     transition: all 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
+.page-content.menu-state--opened {
+    transform: translateX(calc(100% + 20px));
+}
 
-@media screen and (min-width: 600px) and (orientation: landscape) {
+@media screen and (min-width: 600px) {
     .page-content {
         margin-left: 120px;
     }
