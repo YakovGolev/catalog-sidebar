@@ -5,8 +5,8 @@ import './menu.css';
 const createMenuTemplate = () => `
     <div class="sidebar-wrapper">
         <div class="hover-frame">
-            <div class="main-panel">
-            </div>
+            <div class="main-panel"></div>
+            <div class="folder-panel"></div>
         </div>
     </div>`;
 
@@ -49,4 +49,9 @@ export class MenuWrapperView extends AbstractView {
     get mainPanel() {
         return this.element.querySelector('.main-panel');
     }
+
+    get folderPanel() {
+        return this.element.querySelector('.folder-panel');
+    }
+
 }

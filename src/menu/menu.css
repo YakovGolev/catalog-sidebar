@@ -55,7 +55,18 @@
 .hover-frame {
     width: calc(100% - 60px);
     height: 100%;
+    position: relative;
     overflow: hidden;
+}
+
+.folder-panel {
+    position: absolute;
+    top: 0;
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    transform: translateX(440px);
+    transition: transform 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
 .sidebar-wrapper.menu-state--opened .sidebar-button {

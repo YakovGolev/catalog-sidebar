@@ -58,6 +58,14 @@ export class MenuPresenter extends AbstractPresenter {
     }
 
     _renderMenuFolder(folder: IMenuFolder){
+        if (folder.parent == null){
+            this._renderRootFolder(folder);
+            return;
+        }
+
+    }
+
+    _renderRootFolder(folder: IMenuFolder){
         const mainPanel = this._wrapperView?.mainPanel;
         if (mainPanel){
             mainPanel.innerHTML = '';
@@ -72,5 +80,6 @@ export class MenuPresenter extends AbstractPresenter {
                 mainPanel.appendChild(btn);
             });
         }    
+
     }
 }
