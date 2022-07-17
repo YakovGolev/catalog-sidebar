@@ -3,16 +3,18 @@ import AbstractPresenter, { IApplication } from '../component-framework/abstract
 import { MenuWrapperView } from './menu-wrapper-view';
 import { EventType } from '../component-framework/event-bus';
 import { IRoute } from '../component-framework/router';
-import { getMenuFolder, IMenuFolder } from '../mock-data';
+import { getMenuFolder, IMenuFolder, IMenuItem } from '../mock-data';
 import { MenuButtonView } from './menu-button-view';
+import { MenuItemView } from './menu-item-view';
 
 export class MenuPresenter extends AbstractPresenter {
 
     _container : HTMLElement;
     _wrapperView = new MenuWrapperView();
     _menuButton = new MenuButtonView();
-    _pathChangeHandler_bind: (() => void ) | null = null;
-    _route: IRoute | null = null;
+    _pathChangeHandler_bind?: (() => void );
+    _route?: IRoute;
+    _buttonsMap = new Map<HTMLElement, IMenuItem>();
 
     constructor(application: IApplication, container : HTMLElement){
         super(application);
@@ -23,63 +25,71 @@ export class MenuPresenter extends AbstractPresenter {
         render(this._container, this._wrapperView);
         render(this._wrapperView.element, this._menuButton, RenderPosition.BEFORE_END);
         this._initHandlers();
-        this._pathChangeHandler();
+        this._navigateToCurrentRoute();
     }
 
     _initHandlers() {
-        this._pathChangeHandler_bind = this._pathChangeHandler.bind(this);
-        this.on(EventType.PathChanged, this._pathChangeHandler_bind);
         this._menuButton.registerHandlers(this._toggleMenuStateHandler.bind(this));
         this._wrapperView.registerHandlers(this._toggleMenuStateHandler.bind(this));
     }
 
     _toggleMenuStateHandler(e: Event){
-        console.log(e);
         if (this._wrapperView.isOpened && e.currentTarget !== this._wrapperView.hoverFrame){
-            this._wrapperView.close();
+            this._wrapperView.closeMenu();
             this._menuButton.setDefault();
             this.raiseEvent(EventType.MenuClosed, undefined);
         }
         else {
             this._menuButton.setActive();
-            this._wrapperView.open();
+            this._wrapperView.openMenu();
             this.raiseEvent(EventType.MenuOpened, undefined);
         }
     }
 
-    _pathChangeHandler() {
+    _navigateToCurrentRoute() {
         const route = this._application.router.route;
-        if (this._route && this._route.path === route.path)
+        if (this._route)
             return;
 
         this._route = route;
+        getMenuFolder().then(folder => this._renderRootFolder(folder));
         getMenuFolder(route.path).then(folder => this._renderMenuFolder(folder));
-
     }
 
     _renderMenuFolder(folder: IMenuFolder){
-        if (folder.parent == null){
-            this._renderRootFolder(folder);
-            return;
+        const folderPanel = this._wrapperView.folderPanel as HTMLElement;
+        if (folderPanel){
+            folder.items.forEach((item: IMenuItem) => {
+                const view = new MenuItemView(item);
+                this._buttonsMap.set(view.element, item);
+                view.initHandlers(this._menuItemClickHandler.bind(this));
+                render(folderPanel, view);
+            });
+            this._wrapperView.openFolder();
         }
 
     }
 
     _renderRootFolder(folder: IMenuFolder){
-        const mainPanel = this._wrapperView?.mainPanel;
+        const mainPanel = this._wrapperView.mainPanel as HTMLElement;
         if (mainPanel){
-            mainPanel.innerHTML = '';
-            folder.items.forEach((item: any) => {
-                const element = document.createElement('div');
-                element.innerHTML = `
-                <div class="main-panel__button button-with-icon">
-                    ${item.icon}
-                    <div class="button-with-icon__text">${item.text}</div>
-                </div>`;
-                const btn = element.children[0];
-                mainPanel.appendChild(btn);
+            folder.items.forEach((item: IMenuItem) => {
+                const view = new MenuItemView(item);
+                this._buttonsMap.set(view.element, item);
+                view.initHandlers(this._menuItemClickHandler.bind(this));
+                render(mainPanel, view);
             });
-        }    
+        }
+    }
 
+    _menuItemClickHandler(e: Event){
+        const button = e.target as HTMLElement;
+        if (button){
+            const item = this._buttonsMap.get(button);            
+            this._application.router.navigate(this, {
+                path: item?.href ?? '',
+                hash: ''
+            });
+        }
     }
 }

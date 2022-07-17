@@ -20,9 +20,9 @@ export interface IMenuFolder {
     items: IMenuItem[]
 }
 
-export function getMenuFolder(id: string | undefined = undefined) : Promise<IMenuFolder> {
+export function getMenuFolder(id?: string) : Promise<IMenuFolder> {
     return new Promise((resolve,reject) => {
-        const folder = _map.get(id ?? '/');
+        const folder = _map.get(id ?? '#');
         if (folder)
             setTimeout(() => resolve(folder), 1000);
         else
@@ -125,6 +125,6 @@ const folder2 = {
 };
 
 const _map = new Map<string, IMenuFolder>();
-_map.set('/', menu);
+_map.set('#', menu);
 _map.set('/articles', folder1);
 _map.set('/2', folder2);

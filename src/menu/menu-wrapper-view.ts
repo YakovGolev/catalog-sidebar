@@ -32,15 +32,24 @@ export class MenuWrapperView extends AbstractView {
         this._handlerLinks.delete('menuClickHandler');
     }
 
-    open(){
+    openMenu(){
         this.element.classList.add(MENU_OPENED);
         this.hoverFrame?.classList.add(MENU_OPENED);
     }
 
-    close(){
+    closeMenu(){
         this.element.classList.remove(MENU_OPENED);
         this.hoverFrame?.classList.remove(MENU_OPENED);
     }
+
+    openFolder(){
+        this.folderPanel?.classList.add('opened');
+    }
+
+    closeFolder(){
+        this.folderPanel?.classList.remove('opened');
+    }
+
 
     get hoverFrame() {
         return this.element.querySelector('.hover-frame');

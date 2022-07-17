@@ -2,7 +2,6 @@ import { IApplication } from './component-framework/abstract-presenter';
 import ApplicationStorage from './component-framework/application-storage';
 import { EventBus } from './component-framework/event-bus';
 import { Router } from './component-framework/router';
-import { getMenuFolder } from './mock-data';
 import { PageGridPresenter } from './page-grid/page-grid-presenter';
 import './styles.css';
 
