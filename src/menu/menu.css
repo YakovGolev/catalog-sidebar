@@ -71,7 +71,7 @@
 }
 
 .sidebar-wrapper.menu-state--opened .folder-panel.opened {
-    transform: translateX(0);
+    transform: translateX(-380px);
 }
 
 .sidebar-wrapper.menu-state--opened .sidebar-button {

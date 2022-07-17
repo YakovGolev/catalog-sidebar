@@ -3,7 +3,7 @@ import AbstractPresenter, { IApplication } from '../component-framework/abstract
 import { MenuWrapperView } from './menu-wrapper-view';
 import { EventType } from '../component-framework/event-bus';
 import { IRoute } from '../component-framework/router';
-import { getMenuFolder, IMenuFolder, IMenuItem } from '../mock-data';
+import { getMenuFolder, IMenuFolder, IMenuItem, MenuItemType } from '../mock-data';
 import { MenuButtonView } from './menu-button-view';
 import { MenuItemView } from './menu-item-view';
 
@@ -67,7 +67,6 @@ export class MenuPresenter extends AbstractPresenter {
             });
             this._wrapperView.openFolder();
         }
-
     }
 
     _renderRootFolder(folder: IMenuFolder){
@@ -83,13 +82,19 @@ export class MenuPresenter extends AbstractPresenter {
     }
 
     _menuItemClickHandler(e: Event){
-        const button = e.target as HTMLElement;
+        const button = e.currentTarget as HTMLElement;
         if (button){
-            const item = this._buttonsMap.get(button);            
-            this._application.router.navigate(this, {
-                path: item?.href ?? '',
-                hash: ''
-            });
+            const item = this._buttonsMap.get(button);
+            console.log(item);
+            if (item?.type === MenuItemType.folder){
+                getMenuFolder(item.href).then(folder => this._renderMenuFolder(folder))
+            }
+            else {
+                this._application.router.navigate(this, {
+                    path: item?.href ?? '',
+                    hash: ''
+                });    
+            }
         }
     }
 }
